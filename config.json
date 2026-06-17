@@ -1,0 +1,10 @@
+{
+  "Gambar": [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp", ".ico", ".tiff"],
+  "Dokumen": [".pdf", ".doc", ".docx", ".txt", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".rtf", ".csv"],
+  "Video": [".mp4", ".mkv", ".mov", ".avi", ".wmv", ".flv", ".webm"],
+  "Musik": [".mp3", ".wav", ".flac", ".aac", ".ogg", ".m4a", ".wma"],
+  "Arsip": [".zip", ".rar", ".7z", ".tar", ".gz", ".bz2"],
+  "Kode": [".py", ".js", ".html", ".css", ".json", ".xml", ".java", ".c", ".cpp", ".h", ".php", ".rb", ".go", ".ts", ".jsx", ".tsx"],
+  "Folder": [],
+  "Lainnya": []
+}
