@@ -4,6 +4,7 @@ import json
 import os
 import shutil
 import sys
+import webbrowser
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -283,6 +284,44 @@ def run(
         sys.exit(1)
 
 
+DONATION_URL = "https://sociabuzz.com/trisnosanjaya"
+
+
+def donate() -> None:
+    """Buka halaman donasi di browser."""
+    console.print(
+        Panel.fit(
+            "[bold yellow]❤️  Dukung pengembangan File Sorter![/bold yellow]\n\n"
+            f"Terima kasih atas dukungan Anda.\n"
+            f"Membuka: [cyan]{DONATION_URL}[/cyan]",
+            border_style="yellow",
+        )
+    )
+    webbrowser.open(DONATION_URL)
+    console.print("[green]Halaman donasi dibuka di browser Anda.[/green]\n")
+
+
+def show_menu() -> str:
+    """Tampilkan menu utama dan kembalikan pilihan user."""
+    console.print()
+    console.print(
+        Panel.fit(
+            "[bold cyan]File Sorter CLI[/bold cyan]\n"
+            "[dim]Kelompokkan file berdasarkan ekstensi[/dim]",
+            border_style="cyan",
+        )
+    )
+    table = Table(box=box.SIMPLE, show_header=False)
+    table.add_column("No", style="cyan", width=4)
+    table.add_column("Menu")
+    table.add_row("[bold]1[/bold]", "Urutkan File")
+    table.add_row("[bold]2[/bold]", "[yellow]Donasi ❤️[/yellow]")
+    table.add_row("[bold]3[/bold]", "Keluar")
+    console.print(table)
+    choice = Prompt.ask("Pilih", choices=["1", "2", "3"], default="1")
+    return choice
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     raw = list(argv) if argv is not None else sys.argv[1:]
     parser = argparse.ArgumentParser(
@@ -296,10 +335,22 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--config", "-c", default=None, help="Path file JSON konfigurasi kustom")
     parser.add_argument("--interactive", "-i", action="store_true", help="Mode input interaktif: isi source/tujuan sendiri")
     parser.add_argument("--include-folders", "-f", action="store_true", help="Sertakan folder (direktori) dalam pengurutan")
+    parser.add_argument("--donate", action="store_true", help="Buka halaman donasi")
     args = parser.parse_args(raw)
 
+    if args.donate:
+        donate()
+        return 0
+
     if args.interactive or not args.source:
-        # Tanpa argumen → otomatis mode interaktif
+        menu_choice = show_menu()
+        if menu_choice == "2":
+            donate()
+            return 0
+        elif menu_choice == "3":
+            console.print("[dim]Sampai jumpa![/dim]")
+            return 0
+        # choice == "1" → lanjut ke interaktif
         ia_argv = _interactive_argv()
         ia = parser.parse_args(ia_argv)
         run(

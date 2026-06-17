@@ -14,6 +14,8 @@ dry-run, rekursif, dan konfigurasi kustom ekstensi.
   diurutkan ke kategori "Folder"
 - Auto-rename duplikat (penanda angka urut)
 - Ringkasan per kategori di akhir proses
+- Menu utama saat dijalankan tanpa argumen
+- **Donasi** ❤️ — dukung proyek via [Sociabuzz](https://sociabuzz.com/trisnosanjaya) (dari menu atau `--donate`)
 - Hanya dependensi standar Python (tanpa pip install)
 
 ## Penggunaan
@@ -22,8 +24,16 @@ dry-run, rekursif, dan konfigurasi kustom ekstensi.
 python file_sorter.py
 ```
 
-Cukup jalankan tanpa argumen — isi sendiri folder sumber, tujuan,
-dan opsi lainnya lewat mode interaktif.
+Akan muncul menu utama:
+
+```
+  1   Urutkan File
+  2   Donasi ❤️
+  3   Keluar
+```
+
+Pilih **1** untuk masuk ke mode interaktif pengurutan file,
+**2** untuk membuka halaman donasi di browser, atau **3** untuk keluar.
 
 Atau langsung kasih argumen untuk mode CLI:
 
@@ -43,6 +53,7 @@ python file_sorter.py --source /path/folder --destination /path/tujuan --mode mo
 | `--config` | `-c` | Path file JSON konfigurasi kustom |
 | `--include-folders` | `-f` | Sertakan folder (direktori) dalam pengurutan |
 | `--interactive` | `-i` | Paksa mode interaktif (tidak wajib) |
+| `--donate` | | Buka halaman donasi di browser |
 
 ### Mode Interaktif
 
@@ -52,7 +63,7 @@ Cukup jalankan:
 python file_sorter.py
 ```
 
-Program akan meminta:
+Pilih **1** (**Urutkan File**) dari menu, lalu program akan meminta:
 1. Folder sumber
 2. Folder tujuan (Enter untuk default: di dalam folder sumber)
 3. Mode (move/copy, default: move)
@@ -64,6 +75,9 @@ Program akan meminta:
 ```bash
 # Dry-run dulu
 python file_sorter.py -s ./Downloads -d ./Sorted --dry-run --include-folders
+
+# Buka halaman donasi
+python file_sorter.py --donate
 ```
 
 ## Konfigurasi Kustom
